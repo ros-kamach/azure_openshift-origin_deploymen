@@ -6,7 +6,7 @@ CN=OpenShift-Cluster
 #git clone https://github.com/Microsoft/openshift-origin
 # cp -r azuredeploy.parameters.json openshift-origin/
 az group deployment create -g $RESOURCE_GROUP \
-      --template-uri https://raw.githubusercontent.com/ros-kamach/azure-openshift-deployment/master/azuredeploy.json \
+      --template-uri https://raw.githubusercontent.com/ros-kamach/azure_openshift-origin_deploymen/azure_deployment/azuredeploy.json \
       --parameters @./azuredeploy.parameters.json --debug
       # --no-wait
 #cd openshift-origin/
