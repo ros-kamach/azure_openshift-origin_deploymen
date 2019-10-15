@@ -54,7 +54,7 @@ sed -i -e 's%#log_path = /var/log/ansible.log'%"log_path = /home/${SUDOUSER}/ans
 runuser -l $SUDOUSER -c "touch /home/${SUDOUSER}/ansible.log"
 
 # Cloning Ansible playbook repository
-((cd /home/$SUDOUSER && git clone https://github.com/ros-kamach/azure_openshift_container_platform_playbooks.git) || (cd azure_openshift_container_platform_playbooks && git pull))
+((cd /home/$SUDOUSER && git clone -b openshift_playbooks https://github.com/ros-kamach/azure_openshift-origin_deploymen.git) || (cd azure_openshift_container_platform_playbooks && git pull))
 if [ -d /home/${SUDOUSER}/azure_openshift_container_platform_playbooks ]
 then
   echo " - Retrieved playbooks successfully"
@@ -228,7 +228,7 @@ EOF
 
 echo $(date) " - Cloning openshift-ansible repo for use in installation"
 
-runuser -l $SUDOUSER -c "git clone -b release-3.9 https://github.com/ros-kamach/azupe_openshift_ansible.git /home/$SUDOUSER/openshift-ansible"
+runuser -l $SUDOUSER -c "git clone -b openshift_ansible https://github.com/ros-kamach/azure_openshift-origin_deploymen.git /home/$SUDOUSER/openshift-ansible"
 chmod -R 777 /home/$SUDOUSER/openshift-ansible
 
 # Run a loop playbook to ensure DNS Hostname resolution is working prior to continuing with script
