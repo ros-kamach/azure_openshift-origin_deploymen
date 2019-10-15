@@ -4,14 +4,6 @@
 
 The master branch will now contain the most current release of OpenShift Container Platform with experimental items.  This may cause instability but will include new things or try new things.
 
-We will now have branches for the stable releases:
-- Release-3.6
-- Release-3.7
-- Release-3.9
-- etc.
-
-
-
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
