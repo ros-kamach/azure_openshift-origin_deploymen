@@ -1,0 +1,75 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "_artifactsLocation": {
+            "value": "https://raw.githubusercontent.com/ros-kamach/azure-openshift-deployment/master"
+        },
+		"masterVmSize": {
+			"value": "Standard_D4s_v3"
+		},
+		"infraVmSize": {
+			"value": "Standard_D2s_v3"
+		},
+		"nodeVmSize": {
+			"value": "Standard_D2s_v3"
+		},
+		"storageKind": {
+			"value": "managed"
+		},
+        "openshiftClusterPrefix": {
+            "value": "ocpcluster"
+        },
+        "masterInstanceCount": {
+            "value": 1
+        },
+        "infraInstanceCount": {
+            "value": 1
+        },
+        "nodeInstanceCount": {
+            "value": 1
+        },
+        "dataDiskSize": {
+            "value": 128
+        },
+        "adminUsername": {
+            "value": "openshiftcloudprovider"
+        },
+        "openshiftPassword": {
+            "value": "s8NA6an6ZikcnrxVAv+kprP0Y1sM"
+        },
+		"enableMetrics": {
+			"value": "false"
+		},
+		"enableLogging": {
+			"value": "false"
+		},
+        "sshPublicKey": {
+            "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNRULFOBGib60eZexTf6lDkkPz4Yx4K1ZAH5eBgMuxCk637bYuV5YVC4XrkABiUZ1S9AK8xxMh+pIblM8hP3nOyNn1ABp3J49sLnRQSmgHiR+HUoIL/FyQR+q1TyoWlrIBrQkOQ8sAa4C7AXI0BxJS3VuLTiGTeKxIc17yqUxox9JWeDfSmsCjqOW4icxDfoel3Gkghqc9HSNdsiNB+IyNmXrx/kqDCFUiOiBs4eZPfqDUecZz7HNxTp7EYNlQJPNZg8taoKFcfNitUswtVpwXjRO/Q3nxUCu9+ktUnK3TTCSdZk/HrRuxobwsJrF8/zjT4h7A3JFXr/on36EXKWRP rkama@macmini019"
+        },
+        "keyVaultResourceGroup": {
+            "value": "east-openshift-project"
+        },
+        "keyVaultName": {
+            "value": "openshift-kv-demo"
+        },
+        "keyVaultSecret": {
+            "value": "openshift-kv-demo-secret"
+        },
+        "enableAzure": {
+			"value": "true"
+	    },
+        "aadClientId": {
+            "value": "e1652e4e-4d4e-4e75-97b2-1db90dee0498"
+        },
+        "aadClientSecret": {
+            "value": "bfee2487-e890-4acd-a423-f56cdb468780"
+        },
+        "defaultSubDomainType": {
+            "value": "nipio"
+        },
+        "defaultSubDomain": {
+            "value": "example.com"
+        }
+    }
+}
