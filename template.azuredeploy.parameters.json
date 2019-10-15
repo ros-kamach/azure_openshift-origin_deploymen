@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "_artifactsLocation": {
-            "value": "https://raw.githubusercontent.com/ros-kamach/azure-openshift-deployment/master"
+            "value": "https://raw.githubusercontent.com/ros-kamach/azure_openshift-origin_deploymen/azure_deployment"
         },
 		"masterVmSize": {
 			"value": "Standard_D4s_v3"
