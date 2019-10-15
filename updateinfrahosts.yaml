@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+  - lineinfile:
+      dest: /etc/ansible/hosts
+      insertafter: '[new_nodes]'
+      line: "{{ lookup('env','INFRA') }} openshift_node_labels=\"{'region': 'infra', 'zone': 'default'}\" openshift_hostname={{ lookup('env','INFRA') }}"
+      regexp: '^$INFRA '
+      state: present
