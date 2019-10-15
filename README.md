@@ -6,14 +6,6 @@ The master branch will now contain the most current release of OpenShift Origin 
 
 Re-introduced non-HA deployment option with 1 Master node.
 
-We now have branches for the stable releases:
-- release-3.6
-- release-3.7
-- release-3.9
-- azurestack-release-3.7
-- azurestack-release-3.9
-- etc.
-
 Bookmark [aka.ms/OpenShift](http://aka.ms/OpenShift) for future reference.
 
 For the **OpenShift Container Platform** refer to https://github.com/Microsoft/openshift-container-platform
