@@ -2,7 +2,7 @@
 - name: delete the node scale groups
   hosts: localhost
   connection: local
-  gather_facts: yes
+  gather_facts: no
   tasks:
   - name: Alert user to variables needed - clusterid
     debug:

@@ -46,7 +46,7 @@
 - name: Optionally subscribe the RHEL nodes
   hosts: oo_all_hosts
   become: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
   - name: Subscribe RHEL instances
     import_role:
