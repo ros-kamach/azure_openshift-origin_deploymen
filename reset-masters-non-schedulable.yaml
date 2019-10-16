@@ -1,8 +1,0 @@
-- hosts: masters
-  gather_facts: no
-  become: yes
-  vars:
-    description: "Reset Masters to non-schedulable"
-  tasks:
-  - name: set masters as non-schedulable
-    command: oc adm manage-node {{inventory_hostname}} --schedulable=false
