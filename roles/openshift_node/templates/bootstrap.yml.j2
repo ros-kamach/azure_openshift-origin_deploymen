@@ -2,7 +2,7 @@
 #!/usr/bin/ansible-playbook
 ---
 - hosts: localhost
-  gather_facts: no
+  gather_facts: yes
   vars:
     origin_dns:
       file: /etc/dnsmasq.d/origin-dns.conf
