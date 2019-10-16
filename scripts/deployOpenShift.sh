@@ -54,8 +54,8 @@ sed -i -e 's%#log_path = /var/log/ansible.log'%"log_path = /home/${SUDOUSER}/ans
 runuser -l $SUDOUSER -c "touch /home/${SUDOUSER}/ansible.log"
 
 # Cloning Ansible playbook repository
-((cd /home/$SUDOUSER && git clone -b openshift_playbooks https://github.com/ros-kamach/azure_openshift-origin_deploymen.git ./openshift_container_platform_playbooks) || (cd openshift_container_platform_playbooks && git pull))
-if [ -d /home/${SUDOUSER}/openshift_container_platform_playbooks ]
+((cd /home/$SUDOUSER && git clone -b openshift_playbooks https://github.com/ros-kamach/azure_openshift-origin_deploymen.git ./openshift_playbooks) || (cd openshift_playbooks && git pull))
+if [ -d /home/${SUDOUSER}/openshift_playbooks ]
 then
   echo " - Retrieved playbooks successfully"
 else
@@ -219,7 +219,7 @@ chmod -R 777 /home/$SUDOUSER/openshift_ansible
 
 # Run a loop playbook to ensure DNS Hostname resolution is working prior to continuing with script
 echo $(date) " - Running DNS Hostname resolution check"
-runuser -l $SUDOUSER -c "ansible-playbook ~/openshift_container_platform_playbooks/check-dns-host-name-resolution.yaml"
+runuser -l $SUDOUSER -c "ansible-playbook ~/openshift_playbooks/check-dns-host-name-resolution.yaml"
 echo $(date) " - DNS Hostname resolution check complete"
 
 # Setup NetworkManager to manage eth0
@@ -239,7 +239,7 @@ echo $(date) " - NetworkManager configuration complete"
 # Create /etc/origin/cloudprovider/azure.conf on all hosts if Azure is enabled
 if [[ $AZURE == "true" ]]
 then
-	runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_container_platform_playbooks/create-azure-conf.yaml"
+	runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_playbooks/create-azure-conf.yaml"
 	if [ $? -eq 0 ]
 	then
 		echo $(date) " - Creation of Cloud Provider Config (azure.conf) completed on all nodes successfully"
@@ -273,17 +273,17 @@ sed -i -e "s/# Defaults    requiretty/Defaults    requiretty/" /etc/sudoers
 # Adding user to OpenShift authentication file
 echo $(date) "- Adding OpenShift user"
 
-runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_container_platform_playbooks/addocpuser.yaml"
+runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_playbooks/addocpuser.yaml"
 
 # Assigning cluster admin rights to OpenShift user
 echo $(date) "- Assigning cluster admin rights to user"
 
-runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_container_platform_playbooks/assignclusteradminrights.yaml"
+runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_playbooks/assignclusteradminrights.yaml"
 
 # Configure Docker Registry to use Azure Storage Account
 echo $(date) "- Configuring Docker Registry to use Azure Storage Account"
 
-runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_container_platform_playbooks/$DOCKERREGISTRYYAML"
+runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_playbooks/$DOCKERREGISTRYYAML"
 
 if [[ $AZURE == "true" ]]
 then
@@ -294,8 +294,8 @@ then
 	runuser -l $SUDOUSER -c  "ansible localhost -b -o -m service -a 'name=origin-master-api state=restarted'"
 	runuser -l $SUDOUSER -c  "ansible localhost -b -o -m service -a 'name=origin-master-controllers state=restarted'"
 	runuser -l $SUDOUSER -c  "ansible localhost -b -o -m service -a 'name=origin-node state=restarted'"
-	runuser -l $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_container_platform_playbooks/reboot-master-origin.yaml"
-	runuser -l $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_container_platform_playbooks/reboot-nodes.yaml"
+	runuser -l $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_playbooks/reboot-master-origin.yaml"
+	runuser -l $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_playbooks/reboot-nodes.yaml"
 
 	if [ $? -eq 0 ]
 	then
@@ -308,7 +308,7 @@ then
 	# Create Storage Class
 	echo $(date) "- Creating Storage Class"
 
-	runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_container_platform_playbooks/configurestorageclass.yaml"
+	runuser $SUDOUSER -c "ansible-playbook -f 10 ~/openshift_playbooks/configurestorageclass.yaml"
 	echo $(date) "- Sleep for 15"
 	sleep 15
 	
@@ -367,7 +367,7 @@ fi
 # Delete yaml files
 echo $(date) "- Deleting unecessary files"
 
-rm -rf /home/${SUDOUSER}/openshift_container_platform_playbooks
+rm -rf /home/${SUDOUSER}/openshift_playbooks
 
 echo $(date) "- Sleep for 30"
 
