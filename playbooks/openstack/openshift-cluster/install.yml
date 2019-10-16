@@ -13,7 +13,7 @@
 - name: Prepare the Nodes in the cluster for installation
   hosts: oo_all_hosts
   become: yes
-  gather_facts: no
+  gather_facts: yes
   tasks:
   - name: Install dependencies
     import_role:
