@@ -50,8 +50,8 @@ sed -i -e "s/^#host_key_checking = False/host_key_checking = False/" /etc/ansibl
 sed -i -e "s/^#pty=False/pty=False/" /etc/ansible/ansible.cfg
 sed -i -e "s/^#stdout_callback = skippy/stdout_callback = skippy/" /etc/ansible/ansible.cfg
 sed -i -e "s/^#timeout = 10/timeout = 30/" /etc/ansible/ansible.cfg
-sed -i -e 's%#forks          = 5'%"forks = 10%" /etc/ansible/ansible.cfg
-# sed -i -e 's%#pipelining = False'%"pipelining = True%" /etc/ansible/ansible.cfg
+# sed -i -e 's%#forks          = 5'%"forks = 10%" /etc/ansible/ansible.cfg
+sed -i -e 's%#pipelining = False'%"pipelining = True%" /etc/ansible/ansible.cfg
 sed -i -e 's%#log_path = /var/log/ansible.log'%"log_path = /home/${SUDOUSER}/ansible.log%" /etc/ansible/ansible.cfg
 runuser -l $SUDOUSER -c "touch /home/${SUDOUSER}/ansible.log"
 
