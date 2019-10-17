@@ -55,6 +55,9 @@ sed -i -e 's%#pipelining = False'%"pipelining = True%" /etc/ansible/ansible.cfg
 sed -i -e 's%#log_path = /var/log/ansible.log'%"log_path = /home/${SUDOUSER}/ansible.log%" /etc/ansible/ansible.cfg
 runuser -l $SUDOUSER -c "touch /home/${SUDOUSER}/ansible.log"
 
+sed -i -e '/\[defaults\]/a strategy_plugins = /usr/lib/python2.7/site-packages/ansible_mitogen/plugins/strategy' /etc/ansible/ansible.cfg
+sed -i -e '/\[defaults\]/a strategy = mitogen_linear' /etc/ansible/ansible.cfg
+
 # Cloning Ansible playbook repository
 ((cd /home/$SUDOUSER && git clone -b openshift_playbooks https://github.com/ros-kamach/azure_openshift-origin_deploymen.git ./openshift_playbooks) || (cd openshift_playbooks && git pull))
 if [ -d /home/${SUDOUSER}/openshift_playbooks ]
