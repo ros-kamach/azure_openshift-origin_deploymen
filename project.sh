@@ -2,20 +2,20 @@
 LIGHT_GREAN='\033[1;32m'
 RED='\033[0;31m'
 NC='\033[0m'
-# REGION='East US'
 REGION='West Europe'
-# RESOURCE_GROUP="openshift-project"
 RESOURCE_GROUP="openshift"
 SPN="openshiftcloudprovider"
-# KEYVAULT_NAME="openshift-kv-demo"
 KEYVAULT_NAME="openshift-kv-demo"
-# KEYVAULT_SECRET_NAME="openshift-kv-demo-secret"
 KEYVAULT_SECRET_NAME="openshift-kv-demo-secret"
 CLUSTER_PREFIX="openshift-demo"
-# CLUSTER_PREFIX="ocpcluster"
 CN=OpenShift-Cluster
 
-#az login -u obryg@sofserveinc.com -p BuduSupu45
+if [ "$1" == "delete" ]
+    then
+        az group delete --name $RESOURCE_GROUP -y
+        exit 0
+fi
+
 printf "${RED}#########################${NC}\n"
 printf "${LIGHT_GREAN}Creating Resource Group${NC}\n"
 az group create -n $RESOURCE_GROUP -l "$REGION" 
@@ -100,12 +100,12 @@ provision_yes_no () {
 while true; do
     read -p "yes(Yy) to process or no(Nn) to skip Template : " yn
     case $yn in
-        [Yy]* ) printf "${3}Start Deploying!!!${4}\n";
+        [Yy]* ) printf "${2}Start Deploying!!!${3}\n";
                 az group deployment create -g $RESOURCE_GROUP \
                 --template-uri https://raw.githubusercontent.com/ros-kamach/azure_openshift-origin_deploymen/azure_deployment/azuredeploy.json \
                 --parameters @./azuredeploy.parameters.json \
                 --no-wait;break;;
-        [Nn]* ) printf "${2}Step Skipped!!!${4}\n";break;;
+        [Nn]* ) printf "${1}Step Skipped!!!${3}\n";break;;
         * )     echo "Please answer yes(Yy) to Deploy or no(Nn) to skip Deploying.";;
     esac
 done
@@ -113,4 +113,8 @@ done
 
 printf "${RED}#########################${NC}\n"
 printf "${LIGHT_GREAN}Do you want to Deploy it into Azure${NC}\n"
-provision_yes_no ./start.sh $RED $LIGHT_GREAN $NC
+
+if [ "$1" == "deploy" ]
+    then
+        provision_yes_no $RED $LIGHT_GREAN $NC
+fi

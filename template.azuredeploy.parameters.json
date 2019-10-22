@@ -6,16 +6,16 @@
             "value": "https://raw.githubusercontent.com/ros-kamach/azure_openshift-origin_deploymen/azure_deployment"
         },
 		"masterVmSize": {
-			"value": "Standard_DS2_v2"
-		},
-		"infraVmSize": {
-			"value": "Standard_DS2_v2"
-		},
-		"nodeVmSize": {
 			"value": "Standard_D2s_v3"
 		},
+		"infraVmSize": {
+			"value": "Standard_D2s_v3"
+		},
+		"nodeVmSize": {
+			"value": "Standard_DS2_v2"
+		},
 		"storageKind": {
-			"value": "unmanaged"
+			"value": "managed"
 		},
         "openshiftClusterPrefix": {
             "value": "CLUSTER_PREFIX"
@@ -39,7 +39,7 @@
             "value": "OPENSHIFT_PASS"
         },
 		"enableMetrics": {
-			"value": "false"
+			"value": "true"
 		},
 		"enableLogging": {
 			"value": "false"
