@@ -1,6 +1,4 @@
-# azure_openshift-origin_deploymen
-
-# Prometheus and Grafana for OpenShift
+# OpenShift Origin Deployment Template for Azure
 
 This repository contains components for Deploy Openshift-Origin on Azure cluster. 
 
