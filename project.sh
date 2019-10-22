@@ -114,7 +114,7 @@ done
 printf "${RED}#########################${NC}\n"
 printf "${LIGHT_GREAN}Do you want to Deploy it into Azure${NC}\n"
 
-if [ "$1" == "deploy" ]
+if [ "$1" == "apply" ]
     then
         provision_yes_no $RED $LIGHT_GREAN $NC
 fi

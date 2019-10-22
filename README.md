@@ -11,9 +11,9 @@ To deploy, run:
 
 syntax:
 ```
-$ bash project.sh <project name for monitoring> <apply or delete> 
+$ bash project.sh <apply or delete> 
 ```
 example:
 ```
-$ bash prometheus-grafana.sh openshift-metrics apply
+$ bash project.sh apply
 ```
