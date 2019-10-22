@@ -47,6 +47,7 @@ if test -f "$FILE"
     else
         printf "${RED}$FILE doesn't exist${NC}\n"
         printf "${RED}Creating...${NC}\n"
+        mkdir ./ssh-pair
         ssh-keygen -f ./ssh-pair/id_rsa -t rsa -N ''
         printf "${LIGHT_GREAN}New SSH-KEY pair created${NC}\n"
 fi
