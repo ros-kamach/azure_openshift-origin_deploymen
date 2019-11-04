@@ -10,6 +10,20 @@ KEYVAULT_SECRET_NAME="openshift-kv-demo-secret"
 CLUSTER_PREFIX="openshift-demo"
 CN=OpenShift-Cluster
 
+check_args () {
+    case $4 in
+    (apply|delete) ;; # OK
+    (*) printf >&2 "Wrong arg.${2}${4}${3}. Allowed are ${1}apply${3} or ${1}delete${3} \n";
+        printf >&2 "!!! \n";
+        printf >&2 "syntax: bash <*.sh> <apply or delete> \n";
+        printf >&2 "## \n";
+        printf >&2 "example: bash project.sh apply \n";exit 1;;
+    esac
+}
+
+#Check project Names
+check_args ${LIGHT_GREAN} ${RED} ${NC} ${1}
+
 if [ "$1" == "delete" ]
     then
         az group delete --name $RESOURCE_GROUP -y
@@ -113,9 +127,9 @@ done
 }
 
 printf "${RED}#########################${NC}\n"
-printf "${LIGHT_GREAN}Do you want to Deploy it into Azure${NC}\n"
 
 if [ "$1" == "apply" ]
     then
+        printf "${LIGHT_GREAN}Do you want to Deploy it into Azure${NC}\n"
         provision_yes_no $RED $LIGHT_GREAN $NC
 fi
