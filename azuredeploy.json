@@ -336,7 +336,8 @@
 
 		"infraLoadBalancerName": "[concat(variables('openshiftInfraHostname'), 'lb')]",
 		"infraPublicIpAddressId": "[resourceId('Microsoft.Network/publicIPAddresses', variables('infraLbPublicIpDnsLabel'))]",
-		"infraLbId": "[resourceId('Microsoft.Network/loadBalancers', variables('infraLoadBalancerName'))]",
+        "infraLbId": "[resourceId('Microsoft.Network/loadBalancers', variables('infraLoadBalancerName'))]",
+        "lbSkuName": "Standard",
 		"infraLbFrontEndConfigId": "[concat(variables('infraLbId'), '/frontendIPConfigurations/loadBalancerFrontEnd')]",
 		"infraLbBackendPoolId": "[concat(variables('infraLbId'),'/backendAddressPools/loadBalancerBackend')]",
 		"infraLbHttpProbeId": "[concat(variables('infraLbId'),'/probes/httpProbe')]",
@@ -879,7 +880,10 @@
 		}, {
 			"type": "Microsoft.Network/publicIPAddresses",
 			"name": "[variables('infraLbPublicIpDnsLabel')]",
-			"location": "[variables('location')]",
+            "location": "[variables('location')]",
+            "sku": {
+                "name": "[variables('lbSkuName')]"
+              },
 			"apiVersion": "[variables('apiVersionNetwork')]",
 			"tags": {
 				"displayName": "OpenShiftInfraLBPublicIP",
@@ -1017,7 +1021,10 @@
 		{
 			"type": "Microsoft.Network/loadBalancers",
 			"name": "[variables('infraLoadBalancerName')]",
-			"location": "[variables('location')]",
+            "location": "[variables('location')]",
+            "sku": {
+                "name": "[variables('lbSkuName')]"
+              },
 			"apiVersion": "[variables('apiVersionNetwork')]",
 			"tags": {
 				"displayName": "OpenShiftInfraLB",
