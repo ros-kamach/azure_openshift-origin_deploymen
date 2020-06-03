@@ -140,7 +140,7 @@
 				},
 				"caching": "ReadWrite",
 				"createOption": "FromImage",
-				"diskSizeGB": 64,
+				"diskSizeGB": 128,
 				"osType": "Linux"
 			},
 			"dataDisks": [{
@@ -162,7 +162,7 @@
 				},
 				"caching": "ReadWrite",
 				"createOption": "FromImage",
-				"diskSizeGB": 64
+				"diskSizeGB": 128
 			},
 			"dataDisks": [{
 				"name": "[concat(parameters('hostname'), '-docker-pool')]",
